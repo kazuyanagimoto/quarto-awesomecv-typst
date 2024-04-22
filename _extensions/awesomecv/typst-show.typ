@@ -23,16 +23,12 @@ $if(author)$
   author: (
     firstname: "$author.firstname$",
     lastname: "$author.lastname$",
-    email: "$author.email$",
-    phone: "$author.phone$",
-    github: "$author.github$",
-    linkedin: "$author.linkedin$",
     address: "$author.address$",
     positions: ($for(author.positions)$"$it$"$sep$, $endfor$),
     contacts: ($for(author.contacts)$(
-      text: "$it.text$",
-      url: "$it.url$",
-      icon: "$it.icon$",
+      text: unescape_text("$it.text$"),
+      url: unescape_text("$it.url$"),
+      icon: unescape_text("$it.icon$"),
     )$sep$, $endfor$),
   ),
 $endif$

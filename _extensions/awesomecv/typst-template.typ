@@ -5,11 +5,16 @@
 #let color-darkgray = rgb("#333333")
 #let color-gray = rgb("#5d5d5d")
 #let color-lightgray = rgb("#999999")
-#let color-accent-default = rgb("#262F99")
+#let color-accent-default = rgb("#dc3522")
+
+// Default fonts
+#let font-header-default = ("Roboto", "Arial", "Helvetica", "Dejavu Sans")
+#let font-text-default = ("Source Sans Pro", "Arial", "Helvetica", "Dejavu Sans")
 
 /// Helpers
 
 // icon string parser
+
 #let parse_icon_string(icon_string) = {
   if icon_string.starts-with("fa ") [
     #let parts = icon_string.split(" ")
@@ -28,14 +33,14 @@
 }
 
 // contaxt text parser
-#let parse_contact_text(text) = {
-  text.replace("\\@", "@") // unescape @. This is not a perfect solution
+#let unescape_text(text) = {
+  text.replace("\\", "") // This is not a perfect solution
 }
 
 // layout utility
 #let __justify_align(left_body, right_body) = {
   block[
-    #left_body
+    #box(width: 3fr)[#left_body]
     #box(width: 1fr)[
       #align(right)[
         #right_body
@@ -64,28 +69,14 @@
   ]
 }
 
-/// Show a link with an icon, specifically for Github projects
-/// *Example*
-/// #example(`resume.github-link("DeveloperPaul123/awesome-resume")`)
-/// - github-path (string): The path to the Github project (e.g. "DeveloperPaul123/awesome-resume")
-/// -> none
-#let github-link(github-path) = {
-  set box(height: 11pt)
-  
-  align(right + horizon)[
-    #fa-icon("github", fa-set: "Brands", fill: color-darkgray) #link(
-      "https://github.com/" + github-path,
-      github-path,
-    )
-  ]
-}
-
 /// Right section for the justified headers
 /// - body (content): The body of the right header
 #let secondary-right-header(body) = {
   set text(
-    size: 11pt,
-    weight: "medium",
+    size: 10pt,
+    weight: "thin",
+    style: "italic",
+    fill: color-accent-default,
   )
   body
 }
@@ -96,6 +87,8 @@
   set text(
     weight: "light",
     size: 9pt,
+    style: "italic",
+    fill: color-gray,
   )
   body
 }
@@ -131,27 +124,35 @@
 
 
 #let resume(
+  title: "CV",
   author: (:),
   date: datetime.today().display("[month repr:long] [day], [year]"),
   style: (:),
-  colored-headers: true,
-  language: "en",
   body,
 ) = {
   
+  // set default style
   let color-accent = color-accent-default
-  if type(style.color-accent) == "string" {
+  if "color-accent" in style.keys() {
     color-accent = rgb(style.color-accent)
   }
-  
+  let font-header = font-header-default
+  if "font-header" in style.keys() {
+    // font-header = style.font-header
+    font-header = sans
+  }
+  let font-text = font-text-default
+  if "font-text" in style.keys() {
+    font-text = style.font-text
+  }
+
   set document(
     author: author.firstname + " " + author.lastname,
-    title: "resume",
+    title: title,
   )
   
   set text(
-    font: (style.font-text),
-    lang: language,
+    font: (font-text),
     size: 11pt,
     fill: color-darkgray,
     fallback: true,
@@ -172,7 +173,7 @@
           #author.firstname
           #author.lastname
           #sym.dot.c
-          "Resume"
+          CV
         ]
       ][
         #counter(page).display()
@@ -182,11 +183,7 @@
   )
   
   // set paragraph spacing
-  show par: set block(
-    above: 0.75em,
-    below: 0.75em,
-  )
-  set par(justify: true)
+
   
   set heading(
     numbering: none,
@@ -195,7 +192,7 @@
   
   show heading.where(level: 1): it => [
     #set block(
-      above: 1em,
+      above: 1.5em,
       below: 1em,
     )
     #set text(
@@ -204,12 +201,7 @@
     )
     
     #align(left)[
-      #let color = if colored-headers {
-        color-accent
-      } else {
-        color-darkgray
-      }
-      #text[#strong[#text(color)[#it.body.text]]]
+      #text[#strong[#text(color-accent)[#it.body.text.slice(0, 3)]#text(color-darkgray)[#it.body.text.slice(3)]]]
       #box(width: 1fr, line(length: 100%))
     ]
   ]
@@ -228,6 +220,7 @@
     set text(
       size: 10pt,
       weight: "regular",
+      fill: color-gray,
     )
     smallcaps[#it.body]
   }
@@ -239,7 +232,7 @@
           #set text(
             size: 32pt,
             style: "normal",
-            font: (style.font-header),
+            font: (font-header),
           )
           #text(fill: color-gray, weight: "thin")[#author.firstname]
           #text(weight: "bold")[#author.lastname]
@@ -249,6 +242,11 @@
   }
   
   let positions = {
+    set block(
+      above: 0.75em,
+      below: 0.75em,
+    )
+  
     set text(
       color-accent,
       size: 9pt,
@@ -264,6 +262,10 @@
   }
   
   let address = {
+    set block(
+      above: 0.75em,
+      below: 0.75em,
+    )
     set text(
       color-lightgray,
       size: 9pt,
@@ -277,7 +279,8 @@
   let contacts = {
     set box(height: 9pt)
     
-    let separator = box(width: 5pt)
+    let separator = box(width: 5pt, line(start: (0%, 0%), end: (0%, 100%), stroke: color-darkgray))
+    let contact_last = author.contacts.pop()
     
     align(center)[
       #set text(
@@ -288,10 +291,12 @@
       #block[
         #align(horizon)[
           #for contact in author.contacts [
-            #separator
             #box[#parse_icon_string(contact.icon)]
-            #box[#link(contact.url)[#parse_contact_text(contact.text)]]
+            #box[#link(contact.url)[#contact.text]]
+            #separator
           ]
+          #box[#parse_icon_string(contact_last.icon)]
+          #box[#link(contact_last.url)[#contact_last.text]]
         ]
       ]
     ]
@@ -333,33 +338,6 @@
   pad[
     #justified-header(title, location)
     #secondary-justified-header(description, date)
-  ]
-}
-
-/// Show a list of skills in the resume under a given category.
-/// - category (string): The category of the skills
-/// - items (list): The list of skills. This can be a list of strings but you can also emphasize certain skills by using the `strong` function.
-#let resume-skill-item(category, items) = {
-  set block(below: 0.65em)
-  set pad(top: 2pt)
-  
-  pad[
-    #grid(
-      columns: (20fr, 80fr),
-      gutter: 10pt,
-      align(right)[
-        #set text(hyphenate: false)
-        == #category
-      ],
-      align(left)[
-        #set text(
-          size: 11pt,
-          style: "normal",
-          weight: "light",
-        )
-        #items.join(", ")
-      ],
-    )
   ]
 }
 

@@ -1,0 +1,112 @@
+---
+title: "Albert Einstein's CV"
+author:
+  firstname: Albert
+  lastname: Einstein
+  address: "Rämistrasse 101, CH-8092 Zürich, Switzerland, Zürich"
+  positions: ["Research Physicist",  "Professor"]
+  contacts:
+    - icon: fa envelope
+      text: ae@example.com
+      url: "mailto:ae@example.com"
+    - icon: _extensions/awesomecv/assets/icon/bi-house-fill.svg
+      text: example.com
+      url: https://example.com
+    - icon: fa brands orcid
+      text: 0000-0000-0000-0000
+      url: https://orcid.org/0000-0000-0000-0000
+    - icon: fa brands github
+      text: GitHub
+      url: https://github.com/example
+    - icon: fa brands linkedin
+      text: LinkedIn
+      url: https://linkedin.com/in/example
+    - icon: fa brands x-twitter
+      text: twitter
+      url: https://twitter.com/example
+format: awesomecv-typst
+---
+
+
+## Education
+
+```{=typst}
+#resume-entry(
+  title: "Ph.D. in Physics",
+  location: "Zürich, Switzerland",
+  date: "1905",
+  description: "University of Zürich",
+)
+#resume-entry(
+  title: "Master of Science",
+  location: "Zürich, Switzerland",
+  date: "1896 - 1900",
+  description: "ETH",
+)
+```
+
+## Publications
+
+```{=typst}
+#resume-entry(
+  title: "On the Electrodynamics of Moving Bodies",
+  location: " Annalen der Physik",
+  date: "September 1905"
+)
+#resume-entry(
+  title: "On the motion of small particles suspended in liquids at rest required by the molecular-kinetic theory of heat",
+  location: " Annalen der Physik",
+  date: "July 1905"
+)
+```
+
+## Work Experience
+
+```{=typst}
+#resume-entry(
+  title: "Associate Professor",
+  location: "Zürich, Switzerland",
+  date: "1909 - 1911",
+  description: "University of Zürich"
+)
+#resume-entry(
+  title: "Junior Professor",
+  location: "Bern, Switzerland",
+  date: "1908 - 1909",
+  description: "University of Bern"
+)
+#resume-entry(
+  title: "Technical Assistant",
+  location: "Bern, Switzerland",
+  date: "1902 - 1908",
+  description: "Federal Patent Office"
+)
+```
+
+## Awards
+
+```{=typst}
+#resume-entry(
+  title: "Nobel Prize in Physics",
+  location: "Stockholm, Sweden",
+  date: "1921",
+  description: "For his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect"
+)
+```
+
+## Skills
+
+```{=typst}
+#resume-entry(
+  title: "Languages",
+  description: "German (Native), English (Fluent), French (Intermediate)"
+)
+#resume-entry(
+  title: "Programming Languages",
+  description: "Python, C++, Fortran"
+)
+#resume-entry(
+  title: "Markup Languages",
+  description: "Typst, Quarto, LaTeX"
+)
+```
