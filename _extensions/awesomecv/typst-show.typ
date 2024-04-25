@@ -21,22 +21,15 @@ $if(date)$
 $endif$
 $if(author)$
   author: (
-    firstname: "$author.firstname$",
-    lastname: "$author.lastname$",
-    address: "$author.address$",
-    positions: ($for(author.positions)$"$it$"$sep$, $endfor$),
+    firstname: unescape_text("$author.firstname$"),
+    lastname: unescape_text("$author.lastname$"),
+    address: unescape_text("$author.address$"),
+    position: unescape_text("$author.position$"),
     contacts: ($for(author.contacts)$(
       text: unescape_text("$it.text$"),
       url: unescape_text("$it.url$"),
       icon: unescape_text("$it.icon$"),
     )$sep$, $endfor$),
-  ),
-$endif$
-$if(style)$
-  style: (
-    color-accent: "$style.color-accent$",
-    font-header: "$style.font-header$",
-    font-text: "$style.font-text$",
   ),
 $endif$
 )

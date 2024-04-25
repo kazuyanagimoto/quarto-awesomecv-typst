@@ -5,11 +5,28 @@
 #let color-darkgray = rgb("#333333")
 #let color-gray = rgb("#5d5d5d")
 #let color-lightgray = rgb("#999999")
-#let color-accent-default = rgb("#dc3522")
 
-// Default fonts
+// Default style
+#let color-accent-default = rgb("#dc3522")
 #let font-header-default = ("Roboto", "Arial", "Helvetica", "Dejavu Sans")
 #let font-text-default = ("Source Sans Pro", "Arial", "Helvetica", "Dejavu Sans")
+
+// User defined style
+$if(style.color-accent)$
+#let color-accent = rgb("$style.color-accent$")
+$else$
+#let color-accent = color-accent-default
+$endif$
+$if(style.font-header)$
+#let font-header = "$style.font-header$"
+$else$
+#let font-header = font-header-default
+$endif$
+$if(style.font-text)$
+#let font-text = "$style.font-text$"
+$else$
+#let font-text = font-text-default
+$endif$
 
 /// Helpers
 
@@ -34,7 +51,8 @@
 
 // contaxt text parser
 #let unescape_text(text) = {
-  text.replace("\\", "") // This is not a perfect solution
+  // This is not a perfect solution
+  text.replace("\\", "").replace(".~", ". ")
 }
 
 // layout utility
@@ -76,7 +94,7 @@
     size: 10pt,
     weight: "thin",
     style: "italic",
-    fill: color-accent-default,
+    fill: color-accent,
   )
   body
 }
@@ -127,25 +145,9 @@
   title: "CV",
   author: (:),
   date: datetime.today().display("[month repr:long] [day], [year]"),
-  style: (:),
   body,
 ) = {
   
-  // set default style
-  let color-accent = color-accent-default
-  if "color-accent" in style.keys() {
-    color-accent = rgb(style.color-accent)
-  }
-  let font-header = font-header-default
-  if "font-header" in style.keys() {
-    // font-header = style.font-header
-    font-header = sans
-  }
-  let font-text = font-text-default
-  if "font-text" in style.keys() {
-    font-text = style.font-text
-  }
-
   set document(
     author: author.firstname + " " + author.lastname,
     title: title,
@@ -241,7 +243,7 @@
     ]
   }
   
-  let positions = {
+  let position = {
     set block(
       above: 0.75em,
       below: 0.75em,
@@ -254,9 +256,7 @@
     )
     align(center)[
       #smallcaps[
-        #author.positions.join(
-          text[#"  "#sym.dot.c#"  "],
-        )
+        #author.position
       ]
     ]
   }
@@ -303,7 +303,7 @@
   }
   
   name
-  positions
+  position
   address
   contacts
   body
@@ -332,8 +332,7 @@
   title: none,
   location: "",
   date: "",
-  description: "",
-  color-accent: color-accent-default,
+  description: ""
 ) = {
   pad[
     #justified-header(title, location)

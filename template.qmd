@@ -4,7 +4,7 @@ author:
   firstname: Albert
   lastname: Einstein
   address: "Rämistrasse 101, CH-8092 Zürich, Switzerland, Zürich"
-  positions: ["Research Physicist",  "Professor"]
+  position: "Research Physicist ・ Professor"
   contacts:
     - icon: fa envelope
       text: ae@example.com
