@@ -3,7 +3,7 @@
 A Quarto + Typst implementation of Byungjin Park’s [Awesome-CV](https://github.com/posquit0/Awesome-CV).
 The Typst implementation part is inspired by Paul Tsouchlos’s [modern-cv](https://typst.app/universe/package/modern-cv/)
 
-![](template.svg)
+![](assets/img/thumbnail.svg)
 
 ## Install
 

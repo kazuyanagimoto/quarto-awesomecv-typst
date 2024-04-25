@@ -9,7 +9,7 @@ author:
     - icon: fa envelope
       text: ae@example.com
       url: "mailto:ae@example.com"
-    - icon: _extensions/awesomecv/assets/icon/bi-house-fill.svg
+    - icon: assets/icon/bi-house-fill.svg
       text: example.com
       url: https://example.com
     - icon: fa brands orcid
