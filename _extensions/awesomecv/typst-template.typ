@@ -3,6 +3,7 @@
 // const color
 #let color-darknight = rgb("#131A28")
 #let color-darkgray = rgb("#333333")
+#let color-middledarkgray = rgb("#414141")
 #let color-gray = rgb("#5d5d5d")
 #let color-lightgray = rgb("#999999")
 
@@ -58,7 +59,7 @@ $endif$
 // layout utility
 #let __justify_align(left_body, right_body) = {
   block[
-    #box(width: 3fr)[#left_body]
+    #box(width: 4fr)[#left_body]
     #box(width: 1fr)[
       #align(right)[
         #right_body
@@ -121,7 +122,12 @@ $endif$
   )
   pad[
     #__justify_align[
-      == #primary
+      #set text(
+        size: 12pt,
+        weight: "bold",
+        fill: color-darkgray,
+      )
+      #primary
     ][
       #secondary-right-header[#secondary]
     ]
@@ -133,7 +139,12 @@ $endif$
 /// - secondary (content): The secondary section of the header
 #let secondary-justified-header(primary, secondary) = {
   __justify_align[
-    === #primary
+     #set text(
+      size: 10pt,
+      weight: "regular",
+      fill: color-gray,
+    )
+    #primary
   ][
     #tertiary-right-header[#secondary]
   ]
@@ -181,7 +192,6 @@ $endif$
         #counter(page).display()
       ]
     ],
-    footer-descent: 0pt,
   )
   
   // set paragraph spacing
@@ -210,10 +220,9 @@ $endif$
   
   show heading.where(level: 2): it => {
     set text(
-      color-darkgray,
+      color-middledarkgray,
       size: 12pt,
-      style: "normal",
-      weight: "bold",
+      weight: "thin"
     )
     it.body
   }
