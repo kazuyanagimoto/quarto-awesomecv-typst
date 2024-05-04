@@ -90,8 +90,12 @@ format: awesomecv-typst
   title: "Nobel Prize in Physics",
   location: "Stockholm, Sweden",
   date: "1921",
-  description: "For his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect"
+  description: "For his services to"
 )
+#resume-item[
+  - Theoritical Physics
+  - Discovery of the law of the photoelectric effect
+]
 ```
 
 ## Skills
