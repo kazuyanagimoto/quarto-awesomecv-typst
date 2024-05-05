@@ -1,0 +1,77 @@
+---
+title: "Albert Einstein's CV"
+author:
+  firstname: Albert
+  lastname: Einstein
+  address: "Rämistrasse 101, CH-8092 Zürich, Switzerland, Zürich"
+  position: Research Physicist・Professor
+  contacts:
+    - icon: fa envelope
+      text: ae@example.com
+      url: "mailto:ae@example.com"
+    - icon: assets/icon/bi-house-fill.svg
+      text: example.com
+      url: https://example.com
+    - icon: fa brands orcid
+      text: 0000-0000-0000-0000
+      url: https://orcid.org/0000-0000-0000-0000
+    - icon: fa brands github
+      text: GitHub
+      url: https://github.com/example
+    - icon: fa brands linkedin
+      text: LinkedIn
+      url: https://linkedin.com/in/example
+    - icon: fa brands x-twitter
+      text: twitter
+      url: https://twitter.com/example
+format: awesomecv-typst
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+# install.packages("typstcv", repos = "https://kazuyanagimoto.r-universe.dev")
+library(typstcv)
+```
+
+
+## Education
+
+```{r}
+#| output: asis
+resume_entry(educ)
+```
+
+
+## Publications
+
+```{r}
+#| output: asis
+resume_entry(pub)
+```
+
+## Work Experience
+
+```{r}
+#| output: asis
+work |>
+  format_date(end = "end", date_format = "%Y", sort_by = "start") |>
+  resume_entry()
+```
+
+## Awards
+
+```{r}
+#| output: asis
+resume_entry(award, details = c("detail1", "detail2"))
+#resume_entry(award, details = grep("^detail", names(award)))
+```
+
+## Skills
+
+```{r}
+#| output: asis
+resume_entry(skill)
+```
