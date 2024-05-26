@@ -1,5 +1,9 @@
 #import "@preview/fontawesome:0.1.0": *
 
+//------------------------------------------------------------------------------
+// Style
+//------------------------------------------------------------------------------
+
 // const color
 #let color-darknight = rgb("#131A28")
 #let color-darkgray = rgb("#333333")
@@ -11,6 +15,7 @@
 #let color-accent-default = rgb("#dc3522")
 #let font-header-default = ("Roboto", "Arial", "Helvetica", "Dejavu Sans")
 #let font-text-default = ("Source Sans Pro", "Arial", "Helvetica", "Dejavu Sans")
+#let align-header-default = center
 
 // User defined style
 $if(style.color-accent)$
@@ -29,7 +34,9 @@ $else$
 #let font-text = font-text-default
 $endif$
 
-/// Helpers
+//------------------------------------------------------------------------------
+// Helper functions
+//------------------------------------------------------------------------------
 
 // icon string parser
 
@@ -149,13 +156,194 @@ $endif$
     #tertiary-right-header[#secondary]
   ]
 }
-/// --- End of Helpers
 
+//------------------------------------------------------------------------------
+// Header
+//------------------------------------------------------------------------------
+
+#let create-header-name(
+  firstname: "",
+  lastname: "",
+) = {
+  
+  pad(bottom: 5pt)[
+    #block[
+      #set text(
+        size: 32pt,
+        style: "normal",
+        font: (font-header),
+      )
+      #text(fill: color-gray, weight: "thin")[#firstname]
+      #text(weight: "bold")[#lastname]
+    ]
+  ]
+}
+
+#let create-header-position(
+  position: "",
+) = {
+  set block(
+      above: 0.75em,
+      below: 0.75em,
+    )
+  
+  set text(
+    color-accent,
+    size: 9pt,
+    weight: "regular",
+  )
+    
+  smallcaps[
+    #position
+  ]
+}
+
+#let create-header-address(
+  address: ""
+) = {
+  set block(
+      above: 0.75em,
+      below: 0.75em,
+  )
+  set text(
+    color-lightgray,
+    size: 9pt,
+    style: "italic",
+  )
+
+  block[#address]
+}
+
+#let create-header-contacts(
+  contacts: (),
+) = {
+  let separator = box(width: 2pt)
+  if(contacts.len() > 1) {
+    block[
+      #set text(
+        size: 9pt,
+        weight: "regular",
+        style: "normal",
+      )
+      #align(horizon)[
+        #for contact in contacts [
+          #set box(height: 9pt)
+          #box[#parse_icon_string(contact.icon) #link(contact.url)[#contact.text]]
+          #separator
+        ]
+      ]
+    ]
+  }
+}
+
+#let create-header-info(
+  firstname: "",
+  lastname: "",
+  position: "",
+  address: "",
+  contacts: (),
+  align-header: center
+) = {
+  align(align-header)[
+    #create-header-name(firstname: firstname, lastname: lastname)
+    #create-header-position(position: position)
+    #create-header-address(address: address)
+    #create-header-contacts(contacts: contacts)
+  ]
+}
+
+#let create-header-image(
+  profile-photo: ""
+) = {
+  if profile-photo.len() > 0 {
+    block(
+      above: 15pt,
+      stroke: none,
+      radius: 9999pt,
+      clip: true,
+      image(
+        fit: "contain",
+        profile-photo
+      )
+    ) 
+  }
+}
+
+#let create-header(
+  firstname: "",
+  lastname: "",
+  position: "",
+  address: "",
+  contacts: (),
+  profile-photo: "",
+) = {
+  if profile-photo.len() > 0 {
+    block[
+      #box(width: 5fr)[
+        #create-header-info(
+          firstname: firstname,
+          lastname: lastname,
+          position: position,
+          address: address,
+          contacts: contacts,
+          align-header: left
+        )
+      ]
+      #box(width: 1fr)[
+        #create-header-image(profile-photo: profile-photo)
+      ]
+    ]
+  } else {
+    
+    create-header-info(
+      firstname: firstname,
+      lastname: lastname,
+      position: position,
+      address: address,
+      contacts: contacts,
+      align-header: center
+    )
+
+  }
+}
+
+//------------------------------------------------------------------------------
+// Resume Entries
+//------------------------------------------------------------------------------
+
+#let resume-item(body) = {
+  set text(
+    size: 10pt,
+    style: "normal",
+    weight: "light",
+    fill: color-darknight,
+  )
+  set par(leading: 0.65em)
+  set list(indent: 1em)
+  body
+}
+
+#let resume-entry(
+  title: none,
+  location: "",
+  date: "",
+  description: ""
+) = {
+  pad[
+    #justified-header(title, location)
+    #secondary-justified-header(description, date)
+  ]
+}
+
+//------------------------------------------------------------------------------
+// Resume Template
+//------------------------------------------------------------------------------
 
 #let resume(
   title: "CV",
   author: (:),
   date: datetime.today().display("[month repr:long] [day], [year]"),
+  profile-photo: "",
   body,
 ) = {
   
@@ -196,7 +384,6 @@ $endif$
   
   // set paragraph spacing
 
-  
   set heading(
     numbering: none,
     outlined: false,
@@ -236,118 +423,13 @@ $endif$
     smallcaps[#it.body]
   }
   
-  let name = {
-    align(center)[
-      #pad(bottom: 5pt)[
-        #block[
-          #set text(
-            size: 32pt,
-            style: "normal",
-            font: (font-header),
-          )
-          #text(fill: color-gray, weight: "thin")[#author.firstname]
-          #text(weight: "bold")[#author.lastname]
-        ]
-      ]
-    ]
-  }
-  
-  let position = {
-    set block(
-      above: 0.75em,
-      below: 0.75em,
-    )
-  
-    set text(
-      color-accent,
-      size: 9pt,
-      weight: "regular",
-    )
-    align(center)[
-      #smallcaps[
-        #author.position
-      ]
-    ]
-  }
-  
-  let address = {
-    set block(
-      above: 0.75em,
-      below: 0.75em,
-    )
-    set text(
-      color-lightgray,
-      size: 9pt,
-      style: "italic",
-    )
-    align(center)[
-      #author.address
-    ]
-  }
-  
-  let contacts = {
-    set box(height: 9pt)
-    
-    let separator = box(width: 5pt, line(start: (0%, 0%), end: (0%, 100%), stroke: color-darkgray))
-    let contact_last = author.contacts.pop()
-    
-    align(center)[
-      #set text(
-        size: 9pt,
-        weight: "regular",
-        style: "normal",
-      )
-      #block[
-        #align(horizon)[
-          #for contact in author.contacts [
-            #box[#parse_icon_string(contact.icon)]
-            #box[#link(contact.url)[#contact.text]]
-            #separator
-          ]
-          #box[#parse_icon_string(contact_last.icon)]
-          #box[#link(contact_last.url)[#contact_last.text]]
-        ]
-      ]
-    ]
-  }
-  
-  name
-  position
-  address
-  contacts
+  // Contents
+  create-header(firstname: author.firstname,
+                lastname: author.lastname,
+                position: author.position,
+                address: author.address,
+                contacts: author.contacts,
+                profile-photo: profile-photo,)
   body
 }
 
-/// The base item for resume entries. 
-/// This formats the item for the resume entries. Typically your body would be a bullet list of items. Could be your responsibilities at a company or your academic achievements in an educational background section.
-/// - body (content): The body of the resume entry
-#let resume-item(body) = {
-  set text(
-    size: 10pt,
-    style: "normal",
-    weight: "light",
-    fill: color-darknight,
-  )
-  set par(leading: 0.65em)
-  set list(indent: 1em)
-  body
-}
-
-/// The base item for resume entries. This formats the item for the resume entries. Typically your body would be a bullet list of items. Could be your responsibilities at a company or your academic achievements in an educational background section.
-/// - title (string): The title of the resume entry
-/// - location (string): The location of the resume entry
-/// - date (string): The date of the resume entry, this can be a range (e.g. "Jan 2020 - Dec 2020")
-/// - description (content): The body of the resume entry
-#let resume-entry(
-  title: none,
-  location: "",
-  date: "",
-  description: ""
-) = {
-  pad[
-    #justified-header(title, location)
-    #secondary-justified-header(description, date)
-  ]
-}
-
-/// ---- End of Resume Template ----

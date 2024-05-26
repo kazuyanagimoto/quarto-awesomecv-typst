@@ -32,4 +32,7 @@ $if(author)$
     )$sep$, $endfor$),
   ),
 $endif$
+$if(profile-photo)$
+  profile-photo: unescape_text("$profile-photo$"),
+$endif$
 )
