@@ -60,6 +60,15 @@ format:
 
 By default, it uses the system fonts, but you can specify the font paths in the `font-paths` field (e.g., GitHub Actions usage.)
 
+### Profile Photo
+
+You can set a profile photo in YAML.
+If you set it, the header will be left-aligned.
+
+```yaml
+profile-photo: "PATH_TO_PHOTO/photo.jpg"
+```
+
 ## kazuyanagimoto/typstcv
 
 This format is designed to be used with an R package [`kazuyanagimoto/typstcv`](http://kazuyanagimoto.com/typstcv/).
