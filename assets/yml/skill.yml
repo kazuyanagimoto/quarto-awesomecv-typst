@@ -1,0 +1,9 @@
+lang:
+  title: Languages
+  description: German (Native), English (Fluent), French (Intermediate)
+programming:
+  title: Programming Languages
+  description: Python, C++, Fortran
+markup:
+  title: Markup Languages
+  description: Typst, Quarto, LaTeX

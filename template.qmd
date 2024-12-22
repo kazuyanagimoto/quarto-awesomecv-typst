@@ -30,87 +30,21 @@ format: awesomecv-typst
 
 ## Education
 
-```{=typst}
-#resume-entry(
-  title: "Ph.D. in Physics",
-  location: "Zürich, Switzerland",
-  date: "1905",
-  description: "University of Zürich",
-)
-#resume-entry(
-  title: "Master of Science",
-  location: "Zürich, Switzerland",
-  date: "1896 - 1900",
-  description: "ETH",
-)
-```
+{{< yaml assets/yml/education.yml >}}
 
 ## Publications
 
-```{=typst}
-#resume-entry(
-  title: "On the Electrodynamics of Moving Bodies",
-  location: " Annalen der Physik",
-  date: "September 1905"
-)
-#resume-entry(
-  title: "On the motion of small particles suspended in liquids at rest required by the molecular-kinetic theory of heat",
-  location: " Annalen der Physik",
-  date: "July 1905"
-)
-```
+{{< yaml assets/yml/education.yml >}}
+
 
 ## Work Experience
 
-```{=typst}
-#resume-entry(
-  title: "Associate Professor",
-  location: "Zürich, Switzerland",
-  date: "1909 - 1911",
-  description: "University of Zürich"
-)
-#resume-entry(
-  title: "Junior Professor",
-  location: "Bern, Switzerland",
-  date: "1908 - 1909",
-  description: "University of Bern"
-)
-#resume-entry(
-  title: "Technical Assistant",
-  location: "Bern, Switzerland",
-  date: "1902 - 1908",
-  description: "Federal Patent Office"
-)
-```
+{{< yaml assets/yml/work.yml >}}
 
 ## Awards
 
-```{=typst}
-#resume-entry(
-  title: "Nobel Prize in Physics",
-  location: "Stockholm, Sweden",
-  date: "1921",
-  description: "For his services to"
-)
-#resume-item[
-  - Theoritical Physics
-  - Discovery of the law of the photoelectric effect
-]
-```
+{{< yaml assets/yml/award.yml >}}
 
 ## Skills
 
-```{=typst}
-#resume-entry(
-  title: "Languages",
-  description: "German (Native), English (Fluent), French (Intermediate)"
-)
-#resume-entry(
-  title: "Programming Languages",
-  description: "Python, C++, Fortran"
-)
-#resume-entry(
-  title: "Markup Languages",
-  description: "Typst, Quarto, LaTeX"
-)
-```
+{{< yaml assets/yml/skill.yml >}}
