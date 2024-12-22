@@ -1,2 +1,6 @@
 *.pdf
 template.typ
+tmp.*
+docs/
+/.quarto/
+.Rproj.user

@@ -1,0 +1,10 @@
+phd:
+  title: Ph.D. in Physics
+  location: Zürich, Switzerland
+  date: 1905
+  description: University of Zürich
+master:
+  title: Master of Science
+  location: Zürich, Switzerland
+  date: 1896 - 1900
+  description: ETH

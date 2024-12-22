@@ -1,11 +1,19 @@
-
+---
+format: gfm
+---
 
 # Quarto-awesomecv-typst Format
 
-A Quarto + Typst implementation of Byungjin Park’s
-[Awesome-CV](https://github.com/posquit0/Awesome-CV). The Typst
-implementation part is inspired by Paul Tsouchlos’s
-[modern-cv](https://typst.app/universe/package/modern-cv/)
+A Quarto + Typst implementation of Byungjin Park’s [Awesome-CV](https://github.com/posquit0/Awesome-CV).
+The Typst implementation part is inspired by Paul Tsouchlos’s [modern-cv](https://typst.app/universe/package/modern-cv/)
+
+```{r}
+#| include: false
+system2("pdftocairo", args = c("-png", "docs/template.pdf", "assets/img/template"))
+system2("magick", args = c("assets/img/template-1.png", "-crop", "2000x600+0+0",
+                           "assets/img/thumbnail.png"))
+unlink("assets/img/template-1.png")
+```
 
 [![](assets/img/thumbnail.png)](https://kazuyanagimoto.com/quarto-awesomecv-typst/template.pdf)
 
@@ -13,13 +21,13 @@ implementation part is inspired by Paul Tsouchlos’s
 
 If you would like to add the clean theme to an existing directory:
 
-``` bash
+```{.bash}
 quarto install extension kazuyanagimoto/quarto-awesomecv-typst
 ```
 
 or you can use a Quarto template that bundles a .qmd starter file:
 
-``` bash
+```{.bash}
 quarto use template kazuyanagimoto/quarto-awesomecv-typst
 ```
 
@@ -29,7 +37,7 @@ quarto use template kazuyanagimoto/quarto-awesomecv-typst
 
 Set author information in YAML.
 
-``` yaml
+```yaml
 author:
   firstname: Albert
   lastname: Einstein
@@ -44,19 +52,15 @@ author:
       url: https://example.com
 ```
 
-- [fontawesome](https://fontawesome.com/search?m=free&o=r) icons are
-  supported via
-  [duskmoon314/typst-fontawesome](https://github.com/duskmoon314/typst-fontawesome)
-  with `fa` prefix.
-- SVG icons can be used by specifying the path to the icon file (e.g.,
-  Google Scholar icon from
-  [Academicons](https://jpswalsh.github.io/academicons/))
+- [fontawesome](https://fontawesome.com/search?m=free&o=r) icons are supported
+via [duskmoon314/typst-fontawesome](https://github.com/duskmoon314/typst-fontawesome) with `fa` prefix.
+- SVG icons can be used by specifying the path to the icon file (e.g., Google Scholar icon from [Academicons](https://jpswalsh.github.io/academicons/))
 
 ### Fonts & Color
 
 You can set fonts and the accent color in YAML.
 
-``` yaml
+```yaml
 style:
    color-accent: "516db0"
    font-header: "Roboto"
@@ -66,15 +70,14 @@ format:
     font-paths: ["PATH_TO_FONT"]
 ```
 
-By default, it uses the system fonts, but you can specify the font paths
-in the `font-paths` field (e.g., GitHub Actions usage.)
+By default, it uses the system fonts, but you can specify the font paths in the `font-paths` field (e.g., GitHub Actions usage.)
 
 ### Profile Photo
 
-You can set a profile photo in YAML. If you set it, the header will be
-left-aligned.
+You can set a profile photo in YAML.
+If you set it, the header will be left-aligned.
 
-``` yaml
+```yaml
 profile-photo: "PATH_TO_PHOTO/photo.jpg"
 ```
 
@@ -82,7 +85,7 @@ profile-photo: "PATH_TO_PHOTO/photo.jpg"
 
 This templates supports the following YAML inputs:
 
-``` yaml
+```yaml
 nobel-prize:
   title: Nobel Prize in Physics
   location: Stockholm, Sweden
@@ -93,22 +96,20 @@ nobel-prize:
     - Discovery of the law of the photoelectric effect
 ```
 
-An item has `title`, `location`, `date`, `description`, and `details`
-fields. You can add a yaml file by the following shortcode:
+An item has `title`, `location`, `date`, `description`, and `details` fields.
+You can add a yaml file by the following shortcode:
 
-``` yaml
+```yaml
 {{< yaml PATH/TO/YAML.yaml >}}
 ```
 
 ## kazuyanagimoto/typstcv
 
-This format is designed to be used with an R package
-[`kazuyanagimoto/typstcv`](http://kazuyanagimoto.com/typstcv/). It
-provides helper functions to create a resume entry from a data frame.
-Please refer to the package
-[documentation](http://kazuyanagimoto.com/typstcv/) for more details.
+This format is designed to be used with an R package [`kazuyanagimoto/typstcv`](http://kazuyanagimoto.com/typstcv/).
+It provides helper functions to create a resume entry from a data frame.
+Please refer to the package [documentation](http://kazuyanagimoto.com/typstcv/) for more details.
 
-``` r
+```{r}
 library(typstcv)
 
 educ <- data.frame(
@@ -121,12 +122,7 @@ educ <- data.frame(
 resume_entry(educ)
 ```
 
-    ```{=typst}
-    #resume-entry(title: "Ph.D. in Physics",location: "Zürich, Switzerland",date: "1905",description: "University of Zürich",)
-    #resume-entry(title: "Master of Science",location: "Zürich, Switzerland",date: "1896 - 1900",description: "ETH",)
-    ```
-
-``` r
+```{r}
 award <- data.frame(
  title = c("Nobel Prize in Physics"),
  location = c("Stockholm, Sweden"),
@@ -139,15 +135,7 @@ award <- data.frame(
 resume_entry(award, details = c("detail1", "detail2"))
 ```
 
-    ```{=typst}
-    #resume-entry(title: "Nobel Prize in Physics",location: "Stockholm, Sweden",date: "1921",description: "For his services to",)
-    #resume-item[
-    - Theoretical Physics
-    - Discovery of the law of the photoelectric effect
-    ]
-    ```
-
-``` r
+```{r}
 work <- data.frame(
   title = c("Technical Assistant", "Junior Professor", "Associate Professor"),
   location = c("Bern, Switzerland", "Bern, Switzerland", "Zürich, Switzerland"),
@@ -161,9 +149,3 @@ work |>
   format_date(end = "end", date_format = "%Y", sort_by = "start") |>
   resume_entry()
 ```
-
-    ```{=typst}
-    #resume-entry(title: "Associate Professor",location: "Zürich, Switzerland",date: "1909 - 1911",description: "University of Zürich",)
-    #resume-entry(title: "Junior Professor",location: "Bern, Switzerland",date: "1908 - 1909",description: "University of Bern",)
-    #resume-entry(title: "Technical Assistant",location: "Bern, Switzerland",date: "1902 - 1908",description: "Federal Patent Office",)
-    ```
