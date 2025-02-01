@@ -34,7 +34,7 @@ format: awesomecv-typst
 
 ## Publications
 
-{{< yaml assets/yml/education.yml >}}
+{{< yaml assets/yml/publication.yml >}}
 
 
 ## Work Experience
