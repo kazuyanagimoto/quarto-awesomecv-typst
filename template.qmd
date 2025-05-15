@@ -25,6 +25,7 @@ author:
       text: twitter
       url: https://twitter.com/example
 format: awesomecv-typst
+keep-typ: true
 ---
 
 

@@ -1,4 +1,4 @@
-#import "@preview/fontawesome:0.1.0": *
+#import "@preview/fontawesome:0.5.0": *
 
 //------------------------------------------------------------------------------
 // Style
@@ -46,7 +46,7 @@ $endif$
     #if parts.len() == 2 {
       fa-icon(parts.at(1), fill: color-darknight)
     } else if parts.len() == 3 and parts.at(1) == "brands" {
-      fa-icon(parts.at(2), fa-set: "Brands", fill: color-darknight)
+      fa-icon(parts.at(2), font: "Font Awesome 6 Brands", fill: color-darknight)
     } else {
       assert(false, "Invalid fontawesome icon string")
     }
@@ -342,7 +342,7 @@ $endif$
 #let data-to-resume-entries(
   data: (),
 ) = {
-  let arr = if type(data) == "dictionary" { data.values() } else { data }
+  let arr = if type(data) == dictionary { data.values() } else { data }
   for item in arr [
     #resume-entry(
       title: if "title" in item { item.title } else { none },
@@ -388,7 +388,7 @@ $endif$
   set page(
     paper: "a4",
     margin: (left: 15mm, right: 15mm, top: 10mm, bottom: 10mm),
-    footer: [
+    footer: context [
       #set text(
         fill: gray,
         size: 8pt,
