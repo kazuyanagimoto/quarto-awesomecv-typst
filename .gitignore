@@ -4,3 +4,5 @@ tmp.*
 docs/
 /.quarto/
 .Rproj.user
+.Renviron
+.DS_Store
