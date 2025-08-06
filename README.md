@@ -59,6 +59,7 @@ You can set fonts and the accent color in YAML.
 ``` yaml
 style:
    color-accent: "516db0"
+   color-link: "202b47"
    font-header: "Roboto"
    font-text: "Source Sans Pro"
 format:
@@ -112,10 +113,10 @@ Please refer to the package
 library(typstcv)
 
 educ <- data.frame(
- title = c("Ph.D. in Physics", "Master of Science"),
- location = c("Zürich, Switzerland", "Zürich, Switzerland"),
- date = c("1905", "1896 - 1900"),
- description = c("University of Zürich", "ETH")
+    title = c("Ph.D. in Physics", "Master of Science"),
+    location = c("Zürich, Switzerland", "Zürich, Switzerland"),
+    date = c("1905", "1896 - 1900"),
+    description = c("University of Zürich", "ETH")
 )
 
 resume_entry(educ)
@@ -128,12 +129,12 @@ resume_entry(educ)
 
 ``` r
 award <- data.frame(
- title = c("Nobel Prize in Physics"),
- location = c("Stockholm, Sweden"),
- date = c("1921"),
- description = c("For his services to"),
- detail1 = c("Theoretical Physics"),
- detail2 = c("Discovery of the law of the photoelectric effect")
+    title = c("Nobel Prize in Physics"),
+    location = c("Stockholm, Sweden"),
+    date = c("1921"),
+    description = c("For his services to"),
+    detail1 = c("Theoretical Physics"),
+    detail2 = c("Discovery of the law of the photoelectric effect")
 )
 
 resume_entry(award, details = c("detail1", "detail2"))
@@ -149,17 +150,24 @@ resume_entry(award, details = c("detail1", "detail2"))
 
 ``` r
 work <- data.frame(
-  title = c("Technical Assistant", "Junior Professor", "Associate Professor"),
-  location = c("Bern, Switzerland", "Bern, Switzerland", "Zürich, Switzerland"),
-  start = as.Date(c("1902-01-01", "1908-01-01", "1909-01-01")),
-  end = as.Date(c("1908-01-01", "1909-01-01", "1911-01-01")),
-  description = c("Federal Patent Office", "University of Bern",
-                  "University of Zürich")
+    title = c("Technical Assistant", "Junior Professor", "Associate Professor"),
+    location = c(
+        "Bern, Switzerland",
+        "Bern, Switzerland",
+        "Zürich, Switzerland"
+    ),
+    start = as.Date(c("1902-01-01", "1908-01-01", "1909-01-01")),
+    end = as.Date(c("1908-01-01", "1909-01-01", "1911-01-01")),
+    description = c(
+        "Federal Patent Office",
+        "University of Bern",
+        "University of Zürich"
+    )
 )
 
 work |>
-  format_date(end = "end", date_format = "%Y", sort_by = "start") |>
-  resume_entry()
+    format_date(end = "end", date_format = "%Y", sort_by = "start") |>
+    resume_entry()
 ```
 
     ```{=typst}
@@ -167,3 +175,5 @@ work |>
     #resume-entry(title: "Junior Professor",location: "Bern, Switzerland",date: "1908 - 1909",description: "University of Bern",)
     #resume-entry(title: "Technical Assistant",location: "Bern, Switzerland",date: "1902 - 1908",description: "Federal Patent Office",)
     ```
+
+[aiueo](https://example.com)
