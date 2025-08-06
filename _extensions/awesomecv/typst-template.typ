@@ -23,6 +23,11 @@ $if(style.color-accent)$
 $else$
 #let color-accent = color-accent-default
 $endif$
+$if(style.color-link)$
+#let color-link = rgb("$style.color-link$")
+$else$
+#let color-link = color-darknight
+$endif$
 $if(style.font-header)$
 #let font-header = "$style.font-header$"
 $else$
@@ -449,6 +454,9 @@ $endif$
     smallcaps[#it.body]
   }
   
+  // Other settings
+  show link: set text(fill: color-link)
+
   // Contents
   create-header(firstname: author.firstname,
                 lastname: author.lastname,
