@@ -175,5 +175,3 @@ work |>
     #resume-entry(title: "Junior Professor",location: "Bern, Switzerland",date: "1908 - 1909",description: "University of Bern",)
     #resume-entry(title: "Technical Assistant",location: "Bern, Switzerland",date: "1902 - 1908",description: "Federal Patent Office",)
     ```
-
-[aiueo](https://example.com)
