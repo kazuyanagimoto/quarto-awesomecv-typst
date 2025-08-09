@@ -341,32 +341,6 @@ $endif$
 }
 
 //------------------------------------------------------------------------------
-// Data to Resume Entries
-//------------------------------------------------------------------------------
-
-#let data-to-resume-entries(
-  data: (),
-) = {
-  let arr = if type(data) == dictionary { data.values() } else { data }
-  for item in arr [
-    #resume-entry(
-      title: if "title" in item { item.title } else { none },
-      location: if "location" in item { item.location } else { none },
-      date: if "date" in  item { item.date } else { none },
-      description: if "description" in item { item.description } else { none }
-    )
-    #if "details" in item {
-      resume-item[
-        #for detail in item.details [
-          - #detail
-        ]
-      ]
-    }
-  ]
-}
-
-
-//------------------------------------------------------------------------------
 // Resume Template
 //------------------------------------------------------------------------------
 
