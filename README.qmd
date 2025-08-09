@@ -11,7 +11,7 @@ The Typst implementation part is inspired by Paul Tsouchlos’s [modern-cv](http
 #| include: false
 system2(
     "pdftocairo",
-    args = c("-png", "docs/template.pdf", "assets/img/template")
+    args = c("-png", "_site/template.pdf", "assets/img/template")
 )
 system2(
     "magick",

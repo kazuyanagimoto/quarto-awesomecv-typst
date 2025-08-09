@@ -1,7 +1,7 @@
 *.pdf
 template.typ
 tmp.*
-docs/
+_site/
 /.quarto/
 .Rproj.user
 .Renviron
