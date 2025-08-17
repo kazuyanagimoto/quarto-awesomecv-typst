@@ -25,7 +25,20 @@ author:
       text: twitter
       url: https://twitter.com/example
 format: awesomecv-typst
-keep-typ: true
+brand:
+  typography: 
+    fonts:
+      - family: Roboto
+        source: google
+      - family: Source Sans 3
+        source: google
+    base: Source Sans 3
+  color:
+    primary: "#dc3522"
+    link: "#771822"
+  defaults: 
+    awesomecv-typst:
+      font-header: Roboto
 ---
 
 

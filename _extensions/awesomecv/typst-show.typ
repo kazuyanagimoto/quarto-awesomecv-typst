@@ -1,17 +1,3 @@
-// Typst custom formats typically consist of a 'typst-template.typ' (which is
-// the source code for a typst template) and a 'typst-show.typ' which calls the
-// template's function (forwarding Pandoc metadata values as required)
-//
-// This is an example 'typst-show.typ' file (based on the default template  
-// that ships with Quarto). It calls the typst function named 'article' which 
-// is defined in the 'typst-template.typ' file. 
-//
-// If you are creating or packaging a custom typst template you will likely
-// want to replace this file and 'typst-template.typ' entirely. You can find
-// documentation on creating typst templates here and some examples here:
-//   - https://typst.app/docs/tutorial/making-a-template/
-//   - https://github.com/typst/templates
-
 #show: resume.with(
 $if(title)$
   title: [$title$],
@@ -34,5 +20,25 @@ $if(author)$
 $endif$
 $if(profile-photo)$
   profile-photo: unescape_text("$profile-photo$"),
+$endif$
+$if(style.font-header)$
+  font-header: ("$style.font-header$",),
+$elseif(brand.defaults.awesomecv-typst.font-header)$
+  font-header: ("$brand.defaults.awesomecv-typst.font-header$", ),
+$endif$
+$if(style.font-text)$
+  font-text: ("$style.font-text$",),
+$elseif(brand.typography.base.family)$
+  font-text: $brand.typography.base.family$,
+$endif$
+$if(style.color-accent)$
+  color-accent: rgb("$style.color-accent$"),
+$elseif(brand.color.primary)$
+  color-accent: brand-color.primary,
+$endif$
+$if(style.color-link)$
+  color-link: rgb("$style.color-link$"),
+$elseif(brand.color.link)$
+  color-link: brand-color.link,
 $endif$
 )
