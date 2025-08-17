@@ -1,4 +1,4 @@
-#import "@preview/fontawesome:0.6.0": *
+#import "@preview/fontawesome:0.5.0": *
 
 //------------------------------------------------------------------------------
 // Style
@@ -29,7 +29,7 @@
     #if parts.len() == 2 {
       fa-icon(parts.at(1), fill: color-darknight)
     } else if parts.len() == 3 and parts.at(1) == "brands" {
-      fa-icon(parts.at(2), font: "Font Awesome 7 Brands", fill: color-darknight)
+      fa-icon(parts.at(2), font: "Font Awesome 6 Brands", fill: color-darknight)
     } else {
       assert(false, "Invalid fontawesome icon string")
     }

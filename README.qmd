@@ -72,12 +72,7 @@ You can set fonts and the accent color by [_brand.yml](https://quarto.org/docs/a
 
 ```yaml
 brand:
-  typography: 
-    fonts:
-      - family: Roboto
-        source: google
-      - family: Source Sans 3
-        source: google
+  typography:
     base: Source Sans 3
   color:
     primary: "#516db0"

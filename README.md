@@ -60,12 +60,7 @@ YAML.
 
 ``` yaml
 brand:
-  typography: 
-    fonts:
-      - family: Roboto
-        source: google
-      - family: Source Sans 3
-        source: google
+  typography:
     base: Source Sans 3
   color:
     primary: "#516db0"
@@ -128,8 +123,8 @@ resume_entry(educ)
 ```
 
     ```{=typst}
-    #resume-entry(title: "Ph.D. in Physics",location: "Zürich, Switzerland",date: "1905",description: "University of Zürich",)
-    #resume-entry(title: "Master of Science",location: "Zürich, Switzerland",date: "1896 - 1900",description: "ETH",)
+    #resume-entry(title: [Ph.D. in Physics],location: [Zürich, Switzerland],date: [1905],description: [University of Zürich],)
+    #resume-entry(title: [Master of Science],location: [Zürich, Switzerland],date: [1896 - 1900],description: [ETH],)
     ```
 
 ``` r
@@ -146,7 +141,7 @@ resume_entry(award, details = c("detail1", "detail2"))
 ```
 
     ```{=typst}
-    #resume-entry(title: "Nobel Prize in Physics",location: "Stockholm, Sweden",date: "1921",description: "For his services to",)
+    #resume-entry(title: [Nobel Prize in Physics],location: [Stockholm, Sweden],date: [1921],description: [For his services to],)
     #resume-item[
     - Theoretical Physics
     - Discovery of the law of the photoelectric effect
@@ -176,7 +171,7 @@ work |>
 ```
 
     ```{=typst}
-    #resume-entry(title: "Associate Professor",location: "Zürich, Switzerland",date: "1909 - 1911",description: "University of Zürich",)
-    #resume-entry(title: "Junior Professor",location: "Bern, Switzerland",date: "1908 - 1909",description: "University of Bern",)
-    #resume-entry(title: "Technical Assistant",location: "Bern, Switzerland",date: "1902 - 1908",description: "Federal Patent Office",)
+    #resume-entry(title: [Associate Professor],location: [Zürich, Switzerland],date: [1909 - 1911],description: [University of Zürich],)
+    #resume-entry(title: [Junior Professor],location: [Bern, Switzerland],date: [1908 - 1909],description: [University of Bern],)
+    #resume-entry(title: [Technical Assistant],location: [Bern, Switzerland],date: [1902 - 1908],description: [Federal Patent Office],)
     ```

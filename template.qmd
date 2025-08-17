@@ -30,8 +30,11 @@ brand:
     fonts:
       - family: Roboto
         source: google
+        weight: [100, 400, 700]
       - family: Source Sans 3
         source: google
+        weight: [100, 400, 700]
+        style: [normal, italic]
     base: Source Sans 3
   color:
     primary: "#dc3522"

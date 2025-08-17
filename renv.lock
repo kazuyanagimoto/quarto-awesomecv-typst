@@ -922,7 +922,7 @@
     },
     "typstcv": {
       "Package": "typstcv",
-      "Version": "0.0.2.2",
+      "Version": "0.0.2.4",
       "Source": "Repository",
       "Type": "Package",
       "Title": "CV for Quarto & Typst",
@@ -938,6 +938,9 @@
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.2",
       "Repository": "https://kazuyanagimoto.r-universe.dev",
+      "RemoteUrl": "https://github.com/kazuyanagimoto/typstcv",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "d6d55170e7c7e958e54e96f13cf9f0d70ed7f759",
       "NeedsCompilation": "no",
       "Author": "Kazuharu Yanagimoto [aut, cre] (ORCID: <https://orcid.org/0009-0007-1967-8304>)",
       "Maintainer": "Kazuharu Yanagimoto <kazuharu.yanagimoto@gmail.com>"
