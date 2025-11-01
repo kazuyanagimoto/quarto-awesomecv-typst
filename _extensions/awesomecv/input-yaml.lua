@@ -1,6 +1,5 @@
 local function parse_yaml(content)
     local data = {}
-    local key = nil
     local item = {}
     local in_details = false
     
@@ -11,10 +10,10 @@ local function parse_yaml(content)
         if line_trimmed == "" then
             -- Skip empty lines
         elseif indent_level == 0 and line_trimmed:match("^[%w_-]+:$") then
-            if key and next(item) then
-                data[key] = item
+            -- New entry starts, save the previous one if it exists
+            if next(item) then
+                table.insert(data, item)
             end
-            key = line_trimmed:gsub(":$", "")
             item = {}
             in_details = false
         elseif indent_level > 0 and line_trimmed:match("^title:%s*(.+)") then
@@ -37,8 +36,8 @@ local function parse_yaml(content)
     end
     
     -- Add the last item
-    if key and next(item) then
-        data[key] = item
+    if next(item) then
+        table.insert(data, item)
     end
     
     return data
@@ -46,28 +45,8 @@ end
 
 local function construct_entry(data)
     local typst_code = {}
-    
-    -- Convert table to array if it's a dictionary
-    local entries = {}
-    if data and type(data) == "table" then
-        -- Check if it's a dictionary (has string keys)
-        local is_dict = false
-        for k, v in pairs(data) do
-            if type(k) == "string" then
-                is_dict = true
-                break
-            end
-        end
-        
-        if is_dict then
-            -- Convert dictionary values to array
-            for k, v in pairs(data) do
-                table.insert(entries, v)
-            end
-        else
-            entries = data
-        end
-    end
+
+    local entries = data or {}
     
     for _, item in ipairs(entries) do
         local entry_parts = {}
