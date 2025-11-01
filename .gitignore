@@ -7,3 +7,4 @@ _site/
 .Renviron
 .DS_Store
 air.toml
+**/*.quarto_ipynb
